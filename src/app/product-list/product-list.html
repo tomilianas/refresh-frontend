@@ -1,0 +1,11 @@
+<div class="product-list">
+  <div class="product-list-title">
+    <h1>Product List</h1>
+  </div>
+  @for (product of products(); track product.id) {
+  <app-product-card [product]="product" (cartChange)="cartItemChanged.emit($event)">
+  </app-product-card>
+  } @empty {
+  <p>No products available.</p>
+  }
+</div>

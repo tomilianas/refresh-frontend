@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung TV",
+      "price": 580.99
+    },
+    {
+      "id": 2,
+      "name": "Bike",
+      "price": 199.99
+    },
+    {
+      "id": 3,
+      "name": "Toy car",
+      "price": 299.99
+    },
+    {
+      "id": 4,
+      "name": "Laptop",
+      "price": 399.99
+    },
+    {
+      "id": 5,
+      "name": "Headphones",
+      "price": 499.99
+    },
+    {
+      "id": 6,
+      "name": "Smartphone",
+      "price": 599.99
+    }
+  ]
+}

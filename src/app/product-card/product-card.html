@@ -1,0 +1,9 @@
+<div class="product">
+  <h2>{{product().name}}</h2>
+  <p>Price: {{product().price | currency}}</p>
+  @if (isAddedToCart){
+  <button (click)="cartChange.emit(product())">Remove from Cart</button>
+  } @else {
+  <button (click)="cartChange.emit(product())">Add to Cart</button>
+  }
+</div>
