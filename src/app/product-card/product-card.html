@@ -1,9 +1,10 @@
 <div class="product">
-  <h2>{{product().name}}</h2>
+  <h2>{{product().title}}</h2>
+  <div><img [src]="product().thumbnail" alt="{{product().title}}"></div>
   <p>Price: {{product().price | currency}}</p>
   @if (isAddedToCart){
-  <button (click)="cartChange.emit(product())">Remove from Cart</button>
+  <button (click)="cartChange.emit(product()); isAddedToCart = false;">Remove from Cart</button>
   } @else {
-  <button (click)="cartChange.emit(product())">Add to Cart</button>
+  <button (click)="cartChange.emit(product()); isAddedToCart = true;">Add to Cart</button>
   }
 </div>

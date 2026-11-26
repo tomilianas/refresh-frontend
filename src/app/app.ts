@@ -1,8 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import type { Product } from '../models/product';
 import { RouterOutlet } from '@angular/router';
 import { ProductList } from './product-list/product-list';
-import mockData from '../../dummyProducts.json';
+import { Products } from './services/products';
 
 @Component({
   imports: [RouterOutlet, ProductList],
@@ -11,9 +11,13 @@ import mockData from '../../dummyProducts.json';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly products = signal<Product[]>([...mockData.products]);
+  protected readonly products = inject(Products);
   protected readonly cartItems = signal(0);
   productsInCart = signal<Product[]>([]);
+
+  constructor() {
+    this.products.load();
+  }
 
   countCartItems(product: Product) {
     const currentCart = this.productsInCart();

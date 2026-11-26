@@ -1,10 +1,108 @@
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+:host {
+  display: block;
 }
 
+.product-list {
+  counter-reset: product;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: 56px 20px;
+}
+
+.product-list > app-product-card {
+  counter-increment: product;
+}
+
+/* ---------- Page heading (editorial, no box) ---------- */
 .product-list-title {
   grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+  grid-template-areas:
+    'eyebrow eyebrow'
+    'title   sub';
+  align-items: end;
+  column-gap: 48px;
+  padding: 72px 0 40px;
+  margin-bottom: -16px;
+  border-bottom: 1px solid var(--color-line-strong);
+}
+
+/* Eyebrow label with accent dot */
+.product-list-title::before {
+  content: 'New season — Curated picks';
+  grid-area: eyebrow;
+  justify-self: start;
+  margin-bottom: 28px;
+  padding-left: 18px;
+  background: radial-gradient(circle at 4px 50%, var(--color-accent) 4px, transparent 4.5px) no-repeat;
+  color: var(--color-ink-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.product-list-title h1 {
+  grid-area: title;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(52px, 9vw, 128px);
+  font-weight: 600;
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+  color: var(--color-ink);
+}
+
+/* Supporting copy, aligned to the heading baseline on the right */
+.product-list-title::after {
+  content: 'Thoughtfully chosen essentials for everyday life. Free shipping on every order.';
+  grid-area: sub;
+  padding-bottom: 6px;
+  color: var(--color-ink-soft);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* ---------- Empty state ---------- */
+.product-list > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 80px 24px;
   text-align: center;
+  color: var(--color-ink-faint);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .product-list-title {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'eyebrow'
+      'title'
+      'sub';
+    padding: 48px 0 28px;
+  }
+
+  .product-list-title::before {
+    margin-bottom: 20px;
+  }
+
+  .product-list-title::after {
+    max-width: 420px;
+    margin-top: 18px;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 12px;
+  }
 }

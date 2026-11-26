@@ -1,9 +1,16 @@
 <main class="main">
   <div class="content">
-    <app-product-list [products]="products()" (cartItemChanged)="countCartItems($event)"></app-product-list>
+    @if(products.loading()) {
+    <p class="status">Loading products...</p>
+    } @else if (products.error(); as message) {
+    <p class="status">Error loading products: {{message}}</p>
+    <button type="button" (click)="products.load()">Try again</button>
+    } @else if (products.products()) {
+    <app-product-list [products]="products.products()" (cartItemChanged)="countCartItems($event)"></app-product-list>
     <div class="cart">
       <p>Cart Items: {{cartItems()}}</p>
     </div>
+    }
   </div>
 </main>
 <router-outlet />
